@@ -3,24 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3rd Brain — AI Command Center</title>
+<title>MyAiHub — OpenClaw Command Center 🦞</title>
+<meta name="description" content="Self-hosted AI agent hub with 3rd brain, ClawHub skills, Lobster pipelines, and OpenClaw ecosystem tools.">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #080c10;
-  --panel: #0d1117;
+  --bg: #06080c;
+  --panel: #0b0f14;
   --border: #1a2332;
   --accent: #00ff88;
   --accent2: #ff3c6e;
   --accent3: #7b61ff;
   --accent4: #ff9500;
-  --text: #c9d1d9;
-  --muted: #4a5568;
-  --glow: 0 0 20px rgba(0,255,136,0.15);
+  --lobster: #ff5c4d;
+  --lobster-glow: rgba(255,92,77,0.25);
+  --text: #e6edf3;
+  --muted: #6b7280;
+  --glow: 0 0 24px rgba(0,255,136,0.12);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,92,77,0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(0,255,136,0.04), transparent);
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   min-height: 100vh;
@@ -52,12 +58,16 @@ header {
 }
 .logo {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  letter-spacing: 3px;
-  color: var(--accent);
-  text-shadow: 0 0 30px rgba(0,255,136,0.4);
+  font-size: 26px;
+  letter-spacing: 2px;
+  color: var(--lobster);
+  text-shadow: 0 0 30px var(--lobster-glow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.logo span { color: var(--accent2); }
+.logo span { color: var(--accent); }
+.logo-lobster { font-size: 22px; filter: drop-shadow(0 0 8px var(--lobster-glow)); }
 .status-bar {
   display: flex;
   gap: 16px;
@@ -381,6 +391,70 @@ select option { background: var(--panel); }
 .claw-badge.local  { color:var(--accent3); border-color:rgba(123,97,255,0.3); background:rgba(123,97,255,0.06); }
 .claw-badge.sdk    { color:var(--accent4); border-color:rgba(255,149,0,0.3); background:rgba(255,149,0,0.06); }
 
+/* ── HERO / DASHBOARD ── */
+.hero {
+  background: linear-gradient(135deg, rgba(255,92,77,0.06) 0%, rgba(0,255,136,0.04) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '🦞';
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 80px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+.hero-tag { font-family:'Space Mono',monospace; font-size:10px; color:var(--lobster); letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+.hero h1 { font-family:'Bebas Neue',sans-serif; font-size:48px; letter-spacing:2px; line-height:1; margin-bottom:8px; }
+.hero h1 .cycle { color:var(--accent); display:inline-block; min-width:180px; transition: opacity 0.2s; }
+.hero-sub { color:var(--muted); font-size:15px; max-width:520px; line-height:1.6; margin-bottom:20px; }
+.hero-stats { display:flex; gap:12px; flex-wrap:wrap; }
+.hero-stat {
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px 16px;
+  min-width:100px;
+}
+.hero-stat-val { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--lobster); line-height:1; }
+.hero-stat-lbl { font-size:10px; color:var(--muted); font-family:'Space Mono',monospace; }
+.gateway-flow {
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  font-family:'Space Mono',monospace; font-size:11px; color:var(--muted);
+  margin-top:16px; padding:12px; background:rgba(0,0,0,0.3); border-radius:8px;
+}
+.gateway-node { padding:6px 12px; background:var(--panel); border:1px solid var(--border); border-radius:6px; color:var(--text); }
+.gateway-arrow { color:var(--lobster); }
+.quick-actions { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; margin-top:16px; }
+.quick-action {
+  background:var(--panel); border:1px solid var(--border); border-radius:8px;
+  padding:14px; cursor:pointer; transition:all 0.2s; text-align:center;
+}
+.quick-action:hover { border-color:var(--lobster); transform:translateY(-2px); box-shadow:0 4px 20px var(--lobster-glow); }
+.quick-action-icon { font-size:24px; margin-bottom:6px; }
+.quick-action-label { font-size:12px; color:var(--text); }
+.skill-card {
+  background:var(--panel); border:1px solid var(--border); border-radius:8px;
+  padding:14px; transition:all 0.15s;
+}
+.skill-card:hover { border-color:var(--accent3); }
+.skill-slug { font-family:'Space Mono',monospace; font-size:10px; color:var(--accent); margin-bottom:4px; }
+.skill-name { font-size:14px; font-weight:600; margin-bottom:6px; }
+.skill-tags { display:flex; gap:4px; flex-wrap:wrap; }
+.skill-tag { font-size:9px; padding:2px 6px; border-radius:4px; background:rgba(123,97,255,0.15); color:var(--accent3); }
+.pipeline-builder { display:flex; flex-direction:column; gap:8px; }
+.pipeline-step-row { display:flex; gap:8px; align-items:center; }
+.pipeline-step-row select, .pipeline-step-row input { flex:1; }
+.soul-editor { min-height:280px; font-family:'Space Mono',monospace; font-size:13px; line-height:1.7; }
+.btn-lobster { background:var(--lobster); color:#fff; }
+.btn-lobster:hover { box-shadow:0 0 20px var(--lobster-glow); transform:translateY(-1px); }
+
 /* ── RIGHT PANEL ── */
 .right-panel {
   border-left: 1px solid var(--border);
@@ -455,7 +529,7 @@ select option { background: var(--panel); }
 
 <!-- ── HEADER ── -->
 <header>
-  <div class="logo">3RD<span>BRAIN</span> COMMAND</div>
+  <div class="logo"><span class="logo-lobster">🦞</span> MY<span>AI</span>HUB</div>
   <div class="status-bar">
     <div class="status-dot" id="status-dot"></div>
     <span id="status-text" style="color:var(--muted)">connecting...</span>
@@ -467,8 +541,11 @@ select option { background: var(--panel); }
 <div class="layout">
 <!-- ── SIDEBAR ── -->
 <nav class="sidebar">
-  <div class="sidebar-section">Core</div>
-  <div class="nav-item active" onclick="showView('dump')">    <span class="nav-icon">⚡</span> Dump to Brain</div>
+    <div class="sidebar-section">Home</div>
+    <div class="nav-item active" onclick="showView('dashboard')"><span class="nav-icon">🏠</span> Dashboard</div>
+
+    <div class="sidebar-section">Core</div>
+  <div class="nav-item" onclick="showView('dump')">    <span class="nav-icon">⚡</span> Dump to Brain</div>
   <div class="nav-item" onclick="showView('chat')">           <span class="nav-icon">💬</span> Chat</div>
   <div class="nav-item" onclick="showView('memories')">       <span class="nav-icon">🧠</span> Memories <span class="nav-badge" id="mem-count">0</span></div>
   <div class="nav-item" onclick="showView('search')">         <span class="nav-icon">🔍</span> Search</div>
@@ -477,6 +554,15 @@ select option { background: var(--panel); }
   <div class="nav-item" onclick="showView('agents')">         <span class="nav-icon">🤖</span> Agent Hub</div>
   <div class="nav-item" onclick="showView('commander')">      <span class="nav-icon">🎯</span> Commander</div>
   <div class="nav-item" onclick="showView('mission')">        <span class="nav-icon">📋</span> Mission Board</div>
+
+  <div class="sidebar-section" style="margin-top:8px">OpenClaw v4</div>
+  <div class="nav-item" onclick="showView('codeai')">         <span class="nav-icon">⚡</span> CodeAI</div>
+  <div class="nav-item" onclick="showView('clawhub')">        <span class="nav-icon">🏪</span> ClawHub</div>
+  <div class="nav-item" onclick="showView('pipelines')">      <span class="nav-icon">🦞</span> Lobster Pipelines</div>
+  <div class="nav-item" onclick="showView('soul')">           <span class="nav-icon">✨</span> SOUL.md</div>
+  <div class="nav-item" onclick="showView('dream')">           <span class="nav-icon">💤</span> Dreaming</div>
+  <div class="nav-item" onclick="showView('automations')">    <span class="nav-icon">⏰</span> Automations</div>
+  <div class="nav-item" onclick="showView('websearch')">      <span class="nav-icon">🌐</span> Web Search</div>
 
   <div class="sidebar-section" style="margin-top:8px">Tools</div>
   <div class="nav-item" onclick="showView('etsy')">           <span class="nav-icon">🛍️</span> Etsy Manager</div>
@@ -491,8 +577,41 @@ select option { background: var(--panel); }
 <!-- ── MAIN ── -->
 <main class="main">
 
+  <!-- DASHBOARD -->
+  <div class="view active" id="view-dashboard">
+    <div class="hero">
+      <div class="hero-tag">Built with OpenClaw · Self-hosted · Agent-native</div>
+      <h1><span class="cycle" id="hero-cycle">Equip.</span> Your AI Hub.</h1>
+      <p class="hero-sub">Your personal command center — 3rd brain memory, 16 agents, ClawHub skills, Lobster pipelines, and the full OpenClaw ecosystem. EXFOLIATE! EXFOLIATE! 🦞</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-val" id="dash-memories">—</div><div class="hero-stat-lbl">Memories</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">16</div><div class="hero-stat-lbl">Agents</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">52.7k</div><div class="hero-stat-lbl">ClawHub Tools</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">4.8</div><div class="hero-stat-lbl">Avg Rating</div></div>
+      </div>
+      <div class="gateway-flow">
+        <span class="gateway-node">Chat Apps</span><span class="gateway-arrow">→</span>
+        <span class="gateway-node">Gateway</span><span class="gateway-arrow">→</span>
+        <span class="gateway-node">MyAiHub</span><span class="gateway-arrow">→</span>
+        <span class="gateway-node">Agents + Skills</span><span class="gateway-arrow">→</span>
+        <span class="gateway-node">3rd Brain</span>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">Quick Actions</div>
+      <div class="quick-actions">
+        <div class="quick-action" onclick="showView('dump')"><div class="quick-action-icon">⚡</div><div class="quick-action-label">Dump to Brain</div></div>
+        <div class="quick-action" onclick="showView('codeai')"><div class="quick-action-icon">💻</div><div class="quick-action-label">CodeAI</div></div>
+        <div class="quick-action" onclick="showView('clawhub')"><div class="quick-action-icon">🏪</div><div class="quick-action-label">ClawHub Search</div></div>
+        <div class="quick-action" onclick="showView('pipelines')"><div class="quick-action-icon">🦞</div><div class="quick-action-label">Run Pipeline</div></div>
+        <div class="quick-action" onclick="showView('dream')"><div class="quick-action-icon">💤</div><div class="quick-action-label">Dream</div></div>
+        <div class="quick-action" onclick="doCheckin();showView('checkin')"><div class="quick-action-icon">☀️</div><div class="quick-action-label">Daily Check-in</div></div>
+      </div>
+    </div>
+  </div>
+
   <!-- DUMP -->
-  <div class="view active" id="view-dump">
+  <div class="view" id="view-dump">
     <div class="view-title">DUMP TO <span>BRAIN</span></div>
     <div class="card">
       <div class="card-title">Content</div>
@@ -696,7 +815,7 @@ select option { background: var(--panel); }
   <!-- OPENCLAW ECOSYSTEM -->
   <div class="view" id="view-openclaw">
     <div class="view-title">OPENCLAW <span>ECOSYSTEM</span></div>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">~70 open source tools integrated into your command center. Click any to use.</p>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">OpenClaw ecosystem — 70+ open source tools. ClawHub has 52.7k skills · 180k users · 12M downloads.</p>
 
     <div class="card-title" style="margin-bottom:10px">🤖 AGENTS &amp; SERVICES</div>
     <div class="claw-grid" style="margin-bottom:24px">
@@ -847,6 +966,119 @@ select option { background: var(--panel); }
     </div>
   </div>
 
+  <!-- CODEAI -->
+  <div class="view" id="view-codeai">
+    <div class="view-title">CODE<span>AI</span></div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">OpenClaw Codex harness — generate, review, patch, and explain code.</p>
+    <div class="card">
+      <div class="card-title">Action</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+        <select id="code-action" style="width:auto">
+          <option value="generate">Generate</option>
+          <option value="review">Review</option>
+          <option value="patch">Patch</option>
+          <option value="explain">Explain</option>
+        </select>
+        <select id="code-lang" style="width:auto">
+          <option value="python">Python</option>
+          <option value="javascript">JavaScript</option>
+          <option value="typescript">TypeScript</option>
+          <option value="html">HTML</option>
+          <option value="sql">SQL</option>
+        </select>
+      </div>
+      <textarea id="code-instruction" rows="3" placeholder="What should CodeAI do?"></textarea>
+      <textarea id="code-input" rows="8" placeholder="Paste code here (for review, patch, explain)..." style="margin-top:10px"></textarea>
+      <button class="btn btn-lobster" style="margin-top:12px" onclick="doCodeAI()">⚡ RUN CODEAI</button>
+    </div>
+    <div class="terminal" id="code-result" style="display:none;margin-top:12px"></div>
+  </div>
+
+  <!-- CLAWHUB -->
+  <div class="view" id="view-clawhub">
+    <div class="view-title">CLAW<span>HUB</span></div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Search 52.7k+ community skills from <a href="https://clawhub.ai" target="_blank" style="color:var(--lobster)">clawhub.ai</a> — install with <code style="color:var(--accent)">openclaw skills install &lt;slug&gt;</code></p>
+    <div class="card">
+      <div style="display:flex;gap:10px">
+        <input type="text" id="clawhub-query" placeholder="Search skills — github, discord, security, dashboard..." onkeydown="if(event.key==='Enter')doClawHubSearch()">
+        <button class="btn btn-lobster" onclick="doClawHubSearch()">🔍 Search</button>
+      </div>
+    </div>
+    <div id="clawhub-results" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:16px"></div>
+  </div>
+
+  <!-- LOBSTER PIPELINES -->
+  <div class="view" id="view-pipelines">
+    <div class="view-title">LOBSTER <span>PIPELINES</span></div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Multi-step typed workflows — chain agents and tools like OpenClaw's Lobster shell.</p>
+    <div class="card">
+      <input type="text" id="pipeline-name" placeholder="Pipeline name" style="margin-bottom:12px">
+      <div class="pipeline-builder" id="pipeline-steps">
+        <div class="pipeline-step-row">
+          <select class="pipe-tool"><option value="researcher">Researcher</option><option value="coder">Coder</option><option value="analyst">Analyst</option><option value="brainstormer">Brainstormer</option><option value="web_search">Web Search</option><option value="code">Code Gen</option></select>
+          <input type="text" class="pipe-input" placeholder="Step input...">
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn btn-ghost btn-sm" onclick="addPipelineStep()">+ Add Step</button>
+        <button class="btn btn-lobster" onclick="runPipeline()">🦞 RUN PIPELINE</button>
+      </div>
+    </div>
+    <div class="terminal" id="pipeline-result" style="display:none;margin-top:12px"></div>
+  </div>
+
+  <!-- SOUL.md -->
+  <div class="view" id="view-soul">
+    <div class="view-title">SOUL<span>.md</span></div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Configure your agent's personality — OpenClaw's SOUL system shapes how every agent responds.</p>
+    <div class="card">
+      <textarea id="soul-content" class="soul-editor" placeholder="Loading SOUL.md..."></textarea>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn btn-lobster" onclick="saveSoul()">💾 Save SOUL</button>
+        <button class="btn btn-ghost" onclick="loadSoul()">↻ Reload</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DREAMING -->
+  <div class="view" id="view-dream">
+    <div class="view-title">DREAM<span>ING</span></div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Background memory consolidation — find patterns and connections across your 3rd brain while you sleep.</p>
+    <div class="card" style="text-align:center;padding:40px">
+      <div style="font-size:48px;margin-bottom:16px">💤</div>
+      <p style="margin-bottom:20px;color:var(--muted)">Processes your last 30 memories and generates insights.</p>
+      <button class="btn btn-lobster" onclick="doDream()">🌙 Start Dreaming</button>
+    </div>
+    <div class="terminal" id="dream-result" style="display:none;margin-top:12px"></div>
+  </div>
+
+  <!-- AUTOMATIONS -->
+  <div class="view" id="view-automations">
+    <div class="view-title">AUTO<span>MATIONS</span></div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Cron jobs, standing orders, and background tasks — OpenClaw-style proactive automation.</p>
+    <div class="card">
+      <input type="text" id="auto-name" placeholder="Automation name" style="margin-bottom:8px">
+      <input type="text" id="auto-schedule" placeholder="Schedule (e.g. daily 9am, every Monday)" style="margin-bottom:8px">
+      <input type="text" id="auto-action" placeholder="Action (e.g. daily check-in, triage github)" style="margin-bottom:8px">
+      <textarea id="auto-payload" rows="3" placeholder="Optional payload or context..."></textarea>
+      <button class="btn btn-lobster" style="margin-top:12px" onclick="createAutomation()">⏰ Create Automation</button>
+    </div>
+    <div id="auto-list" style="margin-top:16px"></div>
+  </div>
+
+  <!-- WEB SEARCH -->
+  <div class="view" id="view-websearch">
+    <div class="view-title">WEB <span>SEARCH</span></div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Multi-source search via DuckDuckGo + AI synthesis.</p>
+    <div class="card">
+      <div style="display:flex;gap:10px">
+        <input type="text" id="websearch-query" placeholder="Search the web..." onkeydown="if(event.key==='Enter')doWebSearch()">
+        <button class="btn btn-lobster" onclick="doWebSearch()">🌐 Search</button>
+      </div>
+    </div>
+    <div class="terminal" id="websearch-result" style="display:none;margin-top:12px"></div>
+  </div>
+
 </main>
 
 <!-- ── RIGHT PANEL ── -->
@@ -855,7 +1087,8 @@ select option { background: var(--panel); }
     <div class="right-section-title">System Stats</div>
     <div class="stats-row">
       <div class="stat-chip"><div class="stat-val" id="stat-memories">—</div><div class="stat-lbl">Memories</div></div>
-      <div class="stat-chip"><div class="stat-val" style="color:var(--accent3)">15</div><div class="stat-lbl">Agents</div></div>
+      <div class="stat-chip"><div class="stat-val" style="color:var(--accent3)">16</div><div class="stat-lbl">Agents</div></div>
+      <div class="stat-chip"><div class="stat-val" style="color:var(--lobster);font-size:18px">v4</div><div class="stat-lbl">OpenClaw</div></div>
     </div>
   </div>
 
@@ -933,6 +1166,7 @@ const AGENTS = [
   { id:'etsy_manager',    emoji:'🛍️', name:'Etsy Manager',    desc:'Listings, pricing, messages, trend analysis' },
   { id:'memory_agent',    emoji:'🧠', name:'Memory Agent',    desc:'Connect dots across your entire knowledge base' },
   { id:'commander',       emoji:'🎯', name:'Commander',       desc:'Plan missions and coordinate multiple agents' },
+  { id:'code_ai',         emoji:'⚡', name:'CodeAI',          desc:'Generate, review, patch, and explain code' },
 ];
 
 // ── INIT ──────────────────────────────────────────────────────────────────
@@ -946,16 +1180,32 @@ window.addEventListener('load', () => {
   buildAgentGrid();
   loadMemories();
   loadStats();
+  loadSoul();
+  loadClawHubDefault();
+  startHeroCycle();
 });
+
+const HERO_WORDS = ['Equip.', 'Install.', 'Unleash.', 'Ship.', 'Build.', 'Create.'];
+let heroIdx = 0;
+function startHeroCycle() {
+  const el = document.getElementById('hero-cycle');
+  if (!el) return;
+  setInterval(() => {
+    heroIdx = (heroIdx + 1) % HERO_WORDS.length;
+    el.style.opacity = '0';
+    setTimeout(() => { el.textContent = HERO_WORDS[heroIdx]; el.style.opacity = '1'; }, 200);
+  }, 2500);
+}
 
 // ── NAV ──────────────────────────────────────────────────────────────────
 function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('view-' + id).classList.add('active');
-  // find nav item
+  const view = document.getElementById('view-' + id);
+  if (view) view.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => {
-    if (n.textContent.toLowerCase().includes(id.replace('_','').replace('-',''))) n.classList.add('active');
+    const onclick = n.getAttribute('onclick') || '';
+    if (onclick.includes("'" + id + "'")) n.classList.add('active');
   });
 }
 
@@ -1280,8 +1530,146 @@ async function loadStats() {
   try {
     const data = await api('/stats');
     const el = document.getElementById('stat-memories');
+    const dash = document.getElementById('dash-memories');
     if (el) el.textContent = data.total_memories || 0;
+    if (dash) dash.textContent = data.total_memories || 0;
   } catch {}
+}
+
+// ── V4: CodeAI ──────────────────────────────────────────────────────────────
+async function doCodeAI() {
+  const res = document.getElementById('code-result');
+  res.style.display = 'block';
+  res.textContent = '> CodeAI running...\n';
+  try {
+    const data = await api('/code', 'POST', {
+      action: document.getElementById('code-action').value,
+      instruction: document.getElementById('code-instruction').value,
+      code: document.getElementById('code-input').value || null,
+      language: document.getElementById('code-lang').value,
+    });
+    res.textContent = data.result;
+    toast('CodeAI complete!', 'success');
+  } catch(e) { res.textContent = 'ERROR: ' + e.message; }
+}
+
+// ── V4: ClawHub ─────────────────────────────────────────────────────────────
+async function loadClawHubDefault() {
+  try {
+    const data = await api('/clawhub/skills');
+    renderClawHubResults(data.skills || []);
+  } catch {}
+}
+async function doClawHubSearch() {
+  const q = document.getElementById('clawhub-query').value.trim();
+  if (!q) return;
+  try {
+    const data = await api('/clawhub/search', 'POST', { query: q });
+    renderClawHubResults(data.results || []);
+  } catch(e) { toast('Search failed', 'error'); }
+}
+function renderClawHubResults(skills) {
+  const el = document.getElementById('clawhub-results');
+  if (!el) return;
+  el.innerHTML = skills.map(s => `
+    <div class="skill-card">
+      <div class="skill-slug">${s.slug || s.name}</div>
+      <div class="skill-name">${s.name || s.slug}</div>
+      <div class="skill-tags">${(s.tags||[]).map(t=>`<span class="skill-tag">${t}</span>`).join('')}</div>
+      ${s.downloads ? `<div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:'Space Mono',monospace">${(s.downloads/1000).toFixed(1)}k downloads</div>` : ''}
+      ${s.reason ? `<div style="font-size:11px;color:var(--muted);margin-top:6px">${s.reason}</div>` : ''}
+    </div>`).join('');
+}
+
+// ── V4: Pipelines ───────────────────────────────────────────────────────────
+function addPipelineStep() {
+  const container = document.getElementById('pipeline-steps');
+  const row = document.createElement('div');
+  row.className = 'pipeline-step-row';
+  row.innerHTML = `<select class="pipe-tool"><option value="researcher">Researcher</option><option value="coder">Coder</option><option value="analyst">Analyst</option><option value="brainstormer">Brainstormer</option><option value="web_search">Web Search</option><option value="code">Code Gen</option></select><input type="text" class="pipe-input" placeholder="Step input...">`;
+  container.appendChild(row);
+}
+async function runPipeline() {
+  const steps = [...document.querySelectorAll('.pipeline-step-row')].map(row => ({
+    tool: row.querySelector('.pipe-tool').value,
+    input: row.querySelector('.pipe-input').value,
+  })).filter(s => s.input.trim());
+  if (!steps.length) { toast('Add at least one step', 'error'); return; }
+  const res = document.getElementById('pipeline-result');
+  res.style.display = 'block';
+  res.textContent = '> Lobster pipeline running...\n';
+  try {
+    const data = await api('/pipeline/run', 'POST', { name: document.getElementById('pipeline-name').value || 'Untitled', steps });
+    let out = `> Pipeline: ${data.pipeline}\n> Steps: ${data.steps_run}\n\n`;
+    (data.results||[]).forEach(r => { out += `[${r.step}] ${r.tool}: ${r.output.slice(0,200)}...\n\n`; });
+    out += `\n=== FINAL OUTPUT ===\n${data.final_output}`;
+    res.textContent = out;
+    toast('Pipeline complete!', 'success');
+  } catch(e) { res.textContent = 'ERROR: ' + e.message; }
+}
+
+// ── V4: SOUL ────────────────────────────────────────────────────────────────
+async function loadSoul() {
+  try {
+    const data = await api('/soul');
+    const el = document.getElementById('soul-content');
+    if (el) el.value = data.content || '';
+  } catch {}
+}
+async function saveSoul() {
+  try {
+    await api('/soul', 'POST', { content: document.getElementById('soul-content').value });
+    toast('SOUL.md saved!', 'success');
+  } catch(e) { toast('Save failed', 'error'); }
+}
+
+// ── V4: Dreaming ────────────────────────────────────────────────────────────
+async function doDream() {
+  const res = document.getElementById('dream-result');
+  res.style.display = 'block';
+  res.textContent = '> Entering dream state...\n> Consolidating memories...\n';
+  try {
+    const data = await api('/dream', 'POST');
+    res.textContent = data.dream;
+    toast('Dream complete — insights saved!', 'success');
+    loadStats();
+  } catch(e) { res.textContent = 'ERROR: ' + e.message; }
+}
+
+// ── V4: Automations ─────────────────────────────────────────────────────────
+async function createAutomation() {
+  try {
+    const data = await api('/automations', 'POST', {
+      name: document.getElementById('auto-name').value,
+      schedule: document.getElementById('auto-schedule').value,
+      action: document.getElementById('auto-action').value,
+      payload: document.getElementById('auto-payload').value,
+    });
+    toast('Automation created!', 'success');
+    loadAutomations();
+  } catch(e) { toast('Failed', 'error'); }
+}
+async function loadAutomations() {
+  try {
+    const data = await api('/automations');
+    const el = document.getElementById('auto-list');
+    if (!el) return;
+    el.innerHTML = (data.automations||[]).map(a => `
+      <div class="memory-item"><div><div class="memory-title">${a.title}</div><div class="memory-summary">${a.summary||''}</div></div></div>`).join('');
+  } catch {}
+}
+
+// ── V4: Web Search ──────────────────────────────────────────────────────────
+async function doWebSearch() {
+  const q = document.getElementById('websearch-query').value.trim();
+  if (!q) return;
+  const res = document.getElementById('websearch-result');
+  res.style.display = 'block';
+  res.textContent = '> Searching...\n';
+  try {
+    const data = await api('/web-search', 'POST', { query: q });
+    res.textContent = `Query: ${data.query}\n\n${data.synthesis}\n\n--- Sources ---\n${data.abstract||''}\n${(data.related||[]).join('\n')}`;
+  } catch(e) { res.textContent = 'ERROR: ' + e.message; }
 }
 
 // ── ACTIVITY ─────────────────────────────────────────────────────────────
